@@ -6,7 +6,14 @@ contract Election{
         bytes32 name;   
         uint voteCount; // number of total votes
     }
+    struct Voter {
+        bool voted;  
+        uint vote;   
+        bytes32 aadhar_id;
+    }
 
+    mapping(address => Voter) public voters;
+    
     address public curator;
     Proposal[] public proposals;
     mapping(address =>bytes32) voter; // wallet address mapped to aadhar-id 
@@ -28,9 +35,18 @@ contract Election{
 
   function addVoter(address  wallet_address, bytes32 aadhar_id){
     if (wallet_address == msg.sender){
-      voter[wallet_address] = aadhar_id;
+      Voter sender = voters[msg.sender]
+      sender.aadhar_id = aadhar_id;
     } 
   }
-  
+
+ function addVote(uint proposal_index){
+   Voter sender = voters[msg.sender];
+   if (sender.voted)
+      throw;
+   sender.voted = true;
+   sender.vote = proposal_index;
+   proposals[proposal_index].voteCount += 1;
+ }   
 
 }
