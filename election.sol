@@ -8,10 +8,10 @@ contract Election{
     }
 
     address public curator;
-    Proposal[] public proposals
-    mapping(address =>byte32) voter; // wallet address mapped to aadhar-id 
+    Proposal[] public proposals;
+    mapping(address =>bytes32) voter; // wallet address mapped to aadhar-id 
 
-    function Election( byte32[] proposalNames){
+    function Election( bytes32[] proposalNames){
       curator = msg.sender;
       for(uint i = 0; i < proposalNames.length; i++){
         proposals.push(
@@ -26,7 +26,7 @@ contract Election{
 
     }
 
-  function addVoter(address  wallet_address, byte32 aadhar_id){
+  function addVoter(address  wallet_address, bytes32 aadhar_id){
     if (wallet_address == msg.sender){
       voter[wallet_address] = aadhar_id;
     } 
