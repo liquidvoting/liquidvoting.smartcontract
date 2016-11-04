@@ -3,20 +3,20 @@ contract Election{
   // This is a type for a single proposal.
     struct Proposal
     {
-        bytes32 name;   
+        bytes32 name;
         uint voteCount; // number of total votes
     }
     struct Voter {
-        bool voted;  
-        uint vote;   
+        bool voted;
+        uint vote;
         bytes32 aadhar_id;
     }
 
     mapping(address => Voter) public voters;
-    
+
     address public curator;
     Proposal[] public proposals;
-    mapping(address =>bytes32) voter; // wallet address mapped to aadhar-id 
+    mapping(address =>bytes32) voter; // wallet address mapped to aadhar-id
 
     function Election( bytes32[] proposalNames){
       curator = msg.sender;
@@ -35,9 +35,9 @@ contract Election{
 
   function addVoter(address  wallet_address, bytes32 aadhar_id){
     if (wallet_address == msg.sender){
-      Voter sender = voters[msg.sender]
+      Voter sender = voters[msg.sender];
       sender.aadhar_id = aadhar_id;
-    } 
+    }
   }
 
  function addVote(uint proposal_index){
@@ -47,6 +47,6 @@ contract Election{
    sender.voted = true;
    sender.vote = proposal_index;
    proposals[proposal_index].voteCount += 1;
- }   
+ }
 
 }
