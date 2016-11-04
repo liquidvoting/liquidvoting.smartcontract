@@ -1,8 +1,7 @@
 pragma solidity >=0.3.0;
 contract Election{
-  // This is a type for a single proposal.
-  struct Proposal
-  {
+
+  struct Proposal { // This is a type for a single proposal.
     bytes32 name;
     uint voteCount; // number of total votes
   }
@@ -22,12 +21,10 @@ contract Election{
     curator = msg.sender;
     for(uint i = 0; i < proposalNames.length; i++){
       proposals.push(
-        Proposal(
-          {
-            name: proposalNames[i],
-            voteCount: 0
-          }
-          )
+        Proposal({
+          name: proposalNames[i],
+          voteCount: 0
+          })
           );
         }
 
@@ -51,9 +48,8 @@ contract Election{
       function get_proposals() returns (bytes32[] proposalNames){
         bytes32[] proposalNames;
         for(uint i=0; i< proposals.length; i++){
-          proposalNames.push(
-            proposals[i].name
-            );
+          proposalNames[i] = proposals[i].name;
+
           }
 
         }
