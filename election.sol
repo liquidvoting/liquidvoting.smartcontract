@@ -45,13 +45,9 @@ contract Election{
         sender.vote = proposal_index;
         proposals[proposal_index].voteCount += 1;
       }
-      function get_proposals() returns (bytes32[] proposalNames){
-        bytes32[] proposalNames;
-        for(uint i=0; i< proposals.length; i++){
-          proposalNames[i] = proposals[i].name;
 
-          }
-
-        }
+      function show_count(uint proposal_index) returns(uint count){
+        return proposals[proposal_index].voteCount;
+      }
 
       }
